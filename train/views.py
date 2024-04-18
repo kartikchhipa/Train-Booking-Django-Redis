@@ -9,7 +9,10 @@ from redis_client import redis_client, LOCK_EXPIRATION_TIME
 # Create your views here.
 
 class AddTrain(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self, request):
+            if not request.user.is_staff:
+                return Response({"error": "You are not authorized to add train"}, status=403)
             serializers = TrainSerializer(data=request.data)
             if serializers.is_valid():
                 serializers.save()
@@ -66,7 +69,6 @@ class ViewBookings(APIView):
                 "seat_number": seat.seat_number,
                 "source": seat.train.source,
                 "destination": seat.train.destination,
-                "seat_number": seat.seat_number,
             })
         return Response(response)
     
