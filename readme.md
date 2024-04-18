@@ -225,5 +225,49 @@ redis-cli ping
 ## Assumptions 
 - The user can book only one seat at a time.
 
+## SQLite Database Schema
+- **User**
+    - id
+    - username
+    - email
+    - password
+    - is_admin
+- **Train**
+    - id
+    - train_name
+    - source
+    - destination
+    - train_capacity
+- **Seat**
+    - id
+    - train_id (Foreign Key to Train)
+    - seat_number
+    - is_booked
+    - user (Foreign Key to User)
+
+You can find the database schema in the ```models.py``` file in the ```train``` app and in the ```models.py``` file in the ```user``` app.
+
+You can also use the Django Shell to interact with the database. Run the following command to open the Django shell
+```bash
+python manage.py shell
+```
+And then use the following queries to interact with the database
+```python
+from train.models import Train
+from user.models import User
+from train.models import Seat
+
+# To get all the trains
+trains = Train.objects.all()
+
+# To get all the users
+users = User.objects.all()
+
+# To get all the seats
+seats = Seat.objects.all()
+```
+
+
+
 
     
