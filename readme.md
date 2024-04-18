@@ -38,6 +38,7 @@ python manage.py createsuperuser
 ```bash
 redis-cli ping
 ```
+10. Make sure that the Redis server is running at port ```6379```. If the Redis server is running at a different port then change the port in the ```settings.py``` file. And ```redis_client.py``` file.
 
 
 ## APIs
